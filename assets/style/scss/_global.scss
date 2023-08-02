@@ -10,6 +10,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   background: $color-bg-default;
+  color: $color-text-default;
 }
 
 ::selection {
@@ -28,11 +29,29 @@ body {
 
 a {
   transition: all 0.3s;
-  &:hover {
-    color: $color-primary !important;
+  &:hover,
+  &.active {
+    color: $color-primary;
   }
 }
 
 input[type='checkbox'] {
   accent-color: $color-primary;
+}
+
+.customScrollbar::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+.customScrollbar::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: rgb(71 85 105/1);
+  border-radius: 0.25rem;
+}
+
+.customScrollbar::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background-color: transparent;
 }
