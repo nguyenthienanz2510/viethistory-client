@@ -1,0 +1,13 @@
+.text-highlight-primary {
+    color: $color-primary;
+}
+
+.underline-primary {
+    text-decoration: underline;
+    text-decoration-color: $color-primary;
+}
+
+.underline-secondary {
+    text-decoration: underline;
+    text-decoration-color: $color-secondary;
+}
