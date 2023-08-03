@@ -1,5 +1,6 @@
 import '@/assets/style/globals.css'
 import '@/assets/style/index.scss'
+import SideBar from '@/components/admin/Sidebar'
 import Footer from '@/components/user/Footer'
 import Header from '@/components/user/Header'
 import type { Metadata } from 'next'
@@ -12,10 +13,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+      <body className='admin-template'>
+        <div className='flex'>
+          <SideBar />
+          <main>
+            <div className='col-span-3 flex-1 px-5 pb-10 pt-5'>{children}</div>
+          </main>
+        </div>
       </body>
     </html>
   )

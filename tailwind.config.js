@@ -1,6 +1,12 @@
-/** @type {import('tailwindcss').Config} */
+/**
+ * @type {import('tailwindcss').Config}
+ * @type {import('@types/tailwindcss/tailwind-config').TailwindConfig}
+ */
+
 module.exports = {
   content: [
+    './node_modules/flowbite-react/**/*.js',
+    './public/**/*.html',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -57,5 +63,6 @@ module.exports = {
         40: '40px'
       }
     }
-  }
+  },
+  plugins: [require('flowbite/plugin')],
 }
