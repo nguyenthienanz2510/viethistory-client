@@ -1,6 +1,9 @@
+'use client'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { IconDefinition, faCircleUser } from '@fortawesome/free-solid-svg-icons'
-import React, { ReactNode } from 'react'
+import { IconDefinition, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import { faCircle } from '@fortawesome/free-regular-svg-icons'
+import React, { useState } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
 
@@ -8,22 +11,61 @@ type NavItemProps = {
   title: string
   icon: IconDefinition
   href: string
-  active?: boolean
+  submenu?: Array<{ title: string; href: string }>
 }
 
-function NavItem({ title, icon, active, href }: NavItemProps) {
-  console.log(active)
+function NavItem({ title, icon, href, submenu }: NavItemProps) {
+  const [show, setShow] = useState(false)
   return (
     <li>
-      <Link
-        className={classNames('nav-item', {
-          active: active
-        })}
-        href={href}
-      >
-        <FontAwesomeIcon icon={icon} size='xl' />
-        <span>{title}</span>
-      </Link>
+      {submenu ? (
+        <React.Fragment>
+          <Link
+            className={classNames('nav-item', {
+              active: false
+            })}
+            href={'javascript:void(0)'}
+            onClick={() => {
+              setShow(!show)
+            }}
+          >
+            <FontAwesomeIcon icon={icon} size='xl' />
+            <span>{title}</span>
+            <FontAwesomeIcon className='ml-auto' icon={show ? faAngleUp : faAngleDown} size='lg' />
+          </Link>
+          <ul
+            className={classNames('submenu', {
+              show: show
+            })}
+          >
+            {submenu.map((item) => {
+              return (
+                <li key={item.href}>
+                  <Link
+                    className={classNames('nav-item', {
+                      active: false
+                    })}
+                    href={item.href}
+                  >
+                    <FontAwesomeIcon icon={faCircle} size='sm' />
+                    <span>{item.title}</span>
+                  </Link>
+                </li>
+              )
+            })}
+          </ul>
+        </React.Fragment>
+      ) : (
+        <Link
+          className={classNames('nav-item', {
+            active: href === '/dashboard'
+          })}
+          href={href}
+        >
+          <FontAwesomeIcon icon={icon} size='xl' />
+          <span>{title}</span>
+        </Link>
+      )}
     </li>
   )
 }

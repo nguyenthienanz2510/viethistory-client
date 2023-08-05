@@ -1,5 +1,4 @@
 'use client'
-import Hero from '@/components/user/Hero'
 
 import { Alert } from 'flowbite-react'
 
