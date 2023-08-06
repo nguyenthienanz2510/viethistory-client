@@ -13,7 +13,6 @@ function SideBar() {
         <ul className='space-y-1'>
           <NavItem href='/dashboard' title='Dashboard' icon={faGauge} />
           <NavItem
-            href='javascript:void(0)'
             title='Posts'
             icon={faPenToSquare}
             submenu={[
@@ -22,7 +21,6 @@ function SideBar() {
             ]}
           />
           <NavItem
-            href='javascript:void(0)'
             title='Media'
             icon={faImage}
             submenu={[

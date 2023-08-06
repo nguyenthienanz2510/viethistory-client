@@ -31,7 +31,7 @@ function Header({}: Props) {
           <div className='flex'>
             <div className='ml-7 h-7 w-[1px] bg-slate-800' />
             <button className='ml-7 transition-all hover:text-color-primary'>
-              <FontAwesomeIcon icon={faCircleUser} width={24} height={24} />
+              <FontAwesomeIcon icon={faCircleUser} size='xl' />
             </button>
           </div>
         </div>

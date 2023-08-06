@@ -10,7 +10,7 @@ import Link from 'next/link'
 type NavItemProps = {
   title: string
   icon: IconDefinition
-  href: string
+  href?: string
   submenu?: Array<{ title: string; href: string }>
 }
 
@@ -20,11 +20,10 @@ function NavItem({ title, icon, href, submenu }: NavItemProps) {
     <li>
       {submenu ? (
         <React.Fragment>
-          <Link
+          <span
             className={classNames('nav-item', {
               active: false
             })}
-            href={'javascript:void(0)'}
             onClick={() => {
               setShow(!show)
             }}
@@ -32,7 +31,7 @@ function NavItem({ title, icon, href, submenu }: NavItemProps) {
             <FontAwesomeIcon icon={icon} size='xl' />
             <span>{title}</span>
             <FontAwesomeIcon className='ml-auto' icon={show ? faAngleUp : faAngleDown} size='lg' />
-          </Link>
+          </span>
           <ul
             className={classNames('submenu', {
               show: show
@@ -60,7 +59,7 @@ function NavItem({ title, icon, href, submenu }: NavItemProps) {
           className={classNames('nav-item', {
             active: href === '/dashboard'
           })}
-          href={href}
+          href={href || '#'}
         >
           <FontAwesomeIcon icon={icon} size='xl' />
           <span>{title}</span>
