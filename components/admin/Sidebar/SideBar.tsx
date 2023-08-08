@@ -1,13 +1,34 @@
 'use client'
+
 import { faCircleUser, faPenToSquare, faGear, faGauge, faImage } from '@fortawesome/free-solid-svg-icons'
 
 import NavItem from './NavItem'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 function SideBar() {
+  const { data: session, status } = useSession()
+
+  const handleSignIn = async () => {
+    await signIn()
+  }
+
+  const handleSignOut = async () => {
+    await signOut()
+  }
   return (
     <div className='sidebar fixed bottom-0 left-0 top-0 h-screen w-[260px] flex-shrink-0 bg-slate-800 text-color-text-primary'>
       <div className='px-2 py-5'>
         <span className='text-28 font-bold'>Viethistory</span>
+      </div>
+      <div className='px-2 py-5'>
+        {session?.user ? (
+          <>
+            <p>{session?.user.accessToken && 'Hi boy'}</p>
+            <button onClick={handleSignOut}>Sign Out</button>
+          </>
+        ) : (
+          <button onClick={handleSignIn}>Sign In</button>
+        )}
       </div>
       <nav className='custom-scrollbar h-full overflow-y-auto px-2'>
         <ul className='space-y-1'>

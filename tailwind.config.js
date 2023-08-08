@@ -34,6 +34,7 @@ module.exports = {
 
         'color-text-default': '#94A3B8',
         'color-text-primary': '#E2E8F0',
+        'color-text-dark': '#333333',
         'color-bg-default': '#10172a',
         'color-bg-hover': '#161f32',
 
