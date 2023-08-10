@@ -8,7 +8,6 @@ type Props = {}
 
 function Media({}: Props) {
   const { isAuthenticated, profile, reset, setIsAuthenticated } = useContext(AppContext)
-  console.log(isAuthenticated)
 
   const fetchMedia = async () => {
     try {

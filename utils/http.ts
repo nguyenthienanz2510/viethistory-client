@@ -28,8 +28,8 @@ export class Http {
   private refreshTokenRequest: Promise<string> | null
 
   constructor() {
-    this.accessToken = getAccessTokenFromLS()
-    this.refreshToken = getRefreshTokenFromLS()
+    this.accessToken = getAccessTokenFromLS() || ''
+    this.refreshToken = getRefreshTokenFromLS() || ''
     this.refreshTokenRequest = null
     this.instance = axios.create({
       baseURL: siteConfig.API_URL,
@@ -64,11 +64,11 @@ export class Http {
 
         if (url === URL_LOGIN || url === URL_REGISTER) {
           const data = response.data as AuthResponse
-          this.accessToken = data.data.tokens.accessToken
-          this.refreshToken = data.data.tokens.refreshToken
+          this.accessToken = data.data.tokens.access_token
+          this.refreshToken = data.data.tokens.refresh_token
           setAccessTokenToLS(this.accessToken)
           setRefreshTokenToLS(this.refreshToken)
-          // setProfileToLS({ email: 'anz' })
+          setProfileToLS(data.data.profile)
         } else if (url === URL_LOGOUT) {
           this.accessToken = ''
           this.refreshToken = ''
@@ -110,6 +110,7 @@ export class Http {
           clearLS()
           this.accessToken = ''
           this.refreshToken = ''
+
           alert(error.response?.data.message)
           window.location.href = '/login'
         }
@@ -126,14 +127,14 @@ export class Http {
         }
       })
       .then((res) => {
-        const { accessToken, refreshToken } = res.data.data.tokens
+        const { access_token, refresh_token } = res.data.data.tokens
 
-        setAccessTokenToLS(accessToken)
-        setRefreshTokenToLS(refreshToken)
-        this.accessToken = accessToken
-        this.refreshToken = refreshToken
+        setAccessTokenToLS(access_token)
+        setRefreshTokenToLS(refresh_token)
+        this.accessToken = access_token
+        this.refreshToken = refresh_token
 
-        return accessToken
+        return access_token
       })
       .catch((error) => {
         clearLS()
