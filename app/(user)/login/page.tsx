@@ -1,23 +1,24 @@
 'use client'
 
-import { signIn } from 'next-auth/react'
+import http from '@/utils/http'
+import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
 
 type Props = {}
 
 function Login({}: Props) {
+  const router = useRouter()
+
   const email = useRef('')
   const password = useRef('')
 
   const onSubmit = async () => {
     try {
-      const result = await signIn('credentials', {
+      const result = await http.post('/auth/login', {
         email: email.current,
-        password: password.current,
-        redirect: true,
-        callbackUrl: '/'
+        password: password.current
       })
-      console.log(result)
+      router.push('/dashboard')
     } catch (error) {
       console.error('Error during SignIn:', error)
     }

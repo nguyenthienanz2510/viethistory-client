@@ -1,16 +1,18 @@
 'use client'
 
-import { axiosAuth } from '@/lib/axios'
-import useAxiosAuth from '@/lib/hooks/useAxiosAuth'
-import React from 'react'
+import mediaApi from '@/apis/media.api'
+import { AppContext } from '@/contexts/app.context'
+import React, { useContext } from 'react'
 
 type Props = {}
 
 function Media({}: Props) {
-  const axiosAuth = useAxiosAuth()
+  const { isAuthenticated, profile, reset, setIsAuthenticated } = useContext(AppContext)
+  console.log(isAuthenticated)
+
   const fetchMedia = async () => {
     try {
-      const res = await axiosAuth.get('/media')
+      const res = await mediaApi.getMedia()
 
       const media = res.data
 
@@ -20,6 +22,8 @@ function Media({}: Props) {
       return null
     }
   }
+  fetchMedia()
+
   return (
     <div>
       <h1 className='mb-10'>Media</h1>
