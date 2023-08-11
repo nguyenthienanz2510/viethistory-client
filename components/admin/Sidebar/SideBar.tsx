@@ -3,6 +3,7 @@
 import { faCircleUser, faPenToSquare, faGear, faGauge, faImage } from '@fortawesome/free-solid-svg-icons'
 
 import NavItem from './NavItem'
+import User from './User'
 
 function SideBar() {
   return (
@@ -10,7 +11,7 @@ function SideBar() {
       <div className='px-2 py-5'>
         <span className='text-28 font-bold'>Viethistory</span>
       </div>
-      <div className='px-2 py-5'></div>
+      <User />
       <nav className='custom-scrollbar h-full overflow-y-auto px-2'>
         <ul className='space-y-1'>
           <NavItem href='/dashboard' title='Dashboard' icon={faGauge} />

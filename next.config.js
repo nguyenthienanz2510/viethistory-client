@@ -4,6 +4,15 @@ const nextConfig = {
   swcMinify: true,
   experimental: {
     appDir: true
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'res.cloudinary.com',
+        port: ''
+      }
+    ]
   }
 }
 

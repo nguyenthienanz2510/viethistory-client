@@ -3,5 +3,5 @@ export const globalString = {
 }
 
 export const siteConfig = {
-  API_URL: 'https://viethistory-api.cyclic.app/'
+  API_URL: 'https://viethistory-api.cyclic.app'
 }

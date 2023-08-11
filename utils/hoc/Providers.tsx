@@ -10,12 +10,12 @@ function Providers({ children }: React.PropsWithChildren) {
   const [client] = React.useState(new QueryClient())
 
   return (
-    // <AppContextProvider>
-    <QueryClientProvider client={client}>
-      <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-    // {/* </AppContextProvider> */}
+    <AppContextProvider>
+      <QueryClientProvider client={client}>
+        <ReactQueryStreamedHydration>{children}</ReactQueryStreamedHydration>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </AppContextProvider>
   )
 }
 

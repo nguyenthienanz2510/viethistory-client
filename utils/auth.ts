@@ -27,13 +27,13 @@ export const clearLS = () => {
 export const getAccessTokenFromLS = () => {
   if (typeof window == 'undefined') return false
 
-  localStorage.getItem('access_token') || ''
+  return localStorage.getItem('access_token') || ''
 }
 
 export const getRefreshTokenFromLS = () => {
   if (typeof window == 'undefined') return false
 
-  localStorage.getItem('refresh_token') || ''
+  return localStorage.getItem('refresh_token') || ''
 }
 
 export const getProfileFromLS = () => {

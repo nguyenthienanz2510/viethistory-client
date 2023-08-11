@@ -1,14 +1,11 @@
 'use client'
 
 import http from '@/utils/http'
-import { useRouter } from 'next/navigation'
 import React, { useRef } from 'react'
 
 type Props = {}
 
 function Login({}: Props) {
-  const router = useRouter()
-
   const email = useRef('')
   const password = useRef('')
 
@@ -18,7 +15,7 @@ function Login({}: Props) {
         email: email.current,
         password: password.current
       })
-      router.push('/dashboard')
+      window.location.href = '/dashboard'
     } catch (error) {
       console.error('Error during SignIn:', error)
     }
