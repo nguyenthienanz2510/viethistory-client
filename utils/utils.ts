@@ -8,7 +8,11 @@ export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
 }
 
 export function isAxiosUnprocessableEntityError<FormError>(error: unknown): error is AxiosError<FormError> {
-  return isAxiosError(error) && error.response?.status === HttpStatusCode.UnprocessableEntity
+  return (
+    isAxiosError(error) &&
+    (error.response?.status === HttpStatusCode.UnprocessableEntity ||
+      error.response?.status === HttpStatusCode.BadRequest)
+  )
 }
 
 export function isAxiosUnauthorizedError<UnauthorizedError>(error: unknown): error is AxiosError<UnauthorizedError> {

@@ -121,7 +121,7 @@ export class Http {
 
   private handleRefreshToken() {
     return axios
-      .get(`${siteConfig.API_URL}/auth/refresh`, {
+      .post(`${siteConfig.API_URL}/auth/refresh`, {
         headers: {
           Authorization: 'Bearer ' + this.refreshToken
         }

@@ -1,60 +1,96 @@
 'use client'
 
-import http from '@/utils/http'
-import React, { useRef } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import { useMutation } from '@tanstack/react-query'
+import { Schema, schema } from '@/utils/validate'
+import { useRouter } from 'next/navigation'
+import { useContext } from 'react'
+import { AppContext } from '@/contexts/app.context'
+import authApi from '@/apis/auth.api'
+import { isAxiosUnprocessableEntityError } from '@/utils/utils'
+import { ErrorResponse } from '@/types/utils.type'
+import Link from 'next/link'
+import { InputAuth } from '@/components/common/Input'
+import { ButtonPrimary } from '@/components/common/Button'
 
-type Props = {}
+type FormData = Pick<Schema, 'email' | 'password'>
+const loginSchema = schema.pick(['email', 'password'])
 
-function Login({}: Props) {
-  const email = useRef('')
-  const password = useRef('')
+export default function Login() {
+  const { setIsAuthenticated, setProfile } = useContext(AppContext)
+  const router = useRouter()
+  const {
+    register,
+    setError,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormData>({
+    resolver: yupResolver(loginSchema)
+  })
 
-  const onSubmit = async () => {
-    try {
-      const result = await http.post('/auth/login', {
-        email: email.current,
-        password: password.current
-      })
-      window.location.href = '/dashboard'
-    } catch (error) {
-      console.error('Error during SignIn:', error)
-    }
-  }
+  const loginMutation = useMutation({
+    mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.loginAccount(body)
+  })
+  const onSubmit = handleSubmit((data) => {
+    loginMutation.mutate(data, {
+      onSuccess: (data) => {
+        setIsAuthenticated(true)
+        setProfile(data.data.data.profile)
+        router.push('/dashboard')
+      },
+      onError: (error) => {
+        if (isAxiosUnprocessableEntityError<ErrorResponse<null>>(error)) {
+          setError('password', { message: error.response?.data.message, type: 'maxLength' })
+        }
+      }
+    })
+  })
 
   return (
     <div className='container'>
-      <div className='mx-auto flex max-w-[460px] flex-col items-center justify-center gap-5 py-60'>
-        <h1 className='text-4xl font-bold text-color-text-primary'>Login to your account</h1>
-        <div className='w-full space-y-5'>
-          <div>
-            <input
-              className='w-full text-color-text-dark'
-              type='email'
+      <div className='grid grid-cols-1 py-12 lg:grid-cols-4 lg:py-32 lg:pr-10'>
+        <div className='lg:col-span-2 lg:col-start-2'>
+          <form className='rounded bg-white p-10 text-color-text-dark shadow-sm' onSubmit={onSubmit} noValidate>
+            <h1 className='text-2xl'>Login</h1>
+            <InputAuth
               name='email'
-              placeholder='email'
-              onChange={(e) => {
-                email.current = e.target.value
-              }}
+              register={register}
+              type='email'
+              className='mt-8'
+              errorMessage={errors.email?.message}
+              placeholder='Email'
             />
-          </div>
-          <div>
-            <input
-              className='w-full text-color-text-dark'
-              type='text'
+            <InputAuth
               name='password'
-              placeholder='password'
-              onChange={(e) => {
-                password.current = e.target.value
-              }}
+              register={register}
+              type='password'
+              className='mt-2'
+              classNameEye='absolute right-[5px] h-5 w-5 cursor-pointer top-[12px]'
+              errorMessage={errors.password?.message}
+              placeholder='Password'
+              autoComplete='on'
             />
-          </div>
-          <button className='w-full rounded bg-color-primary py-2 text-color-white' onClick={onSubmit}>
-            Login
-          </button>
+            <div className='mt-3'>
+              <ButtonPrimary
+                type='submit'
+                className=''
+                isLoading={loginMutation.isLoading}
+                disabled={loginMutation.isLoading}
+                // full
+              >
+                Login
+              </ButtonPrimary>
+            </div>
+            <div className='mt-8 flex items-center justify-center'>
+              <span className='text-gray-400'>Do not have an account?</span>
+              <Link className='ml-1 text-color-primary hover:text-color-primary/80' href='/register'>
+                Register
+              </Link>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   )
 }
-
-export default Login
