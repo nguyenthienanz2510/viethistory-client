@@ -121,11 +121,16 @@ export class Http {
 
   private handleRefreshToken() {
     return axios
-      .post(`${siteConfig.API_URL}/auth/refresh`, {
-        headers: {
-          Authorization: 'Bearer ' + this.refreshToken
+      .post(
+        `${siteConfig.API_URL}/auth/refresh`,
+        {},
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + this.refreshToken
+          }
         }
-      })
+      )
       .then((res) => {
         const { access_token, refresh_token } = res.data.data.tokens
 

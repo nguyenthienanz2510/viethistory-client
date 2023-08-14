@@ -57,3 +57,12 @@ export const getIdFromNameId = (nameId: string) => {
 
 export const getAvatarUrl = (avatarName?: string) =>
   avatarName ? `${siteConfig.API_URL}images/${avatarName}` : 'avatar-image.png'
+
+export function isMobile() {
+  const userAgent = navigator.userAgent
+  return /Mobi|Android/i.test(userAgent)
+}
+
+function isXsScreen() {
+  return window.innerWidth < 767
+}

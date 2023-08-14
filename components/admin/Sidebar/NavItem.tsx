@@ -6,6 +6,7 @@ import { faCircle } from '@fortawesome/free-regular-svg-icons'
 import React, { useState } from 'react'
 import classNames from 'classnames'
 import Link from 'next/link'
+import { useParams, usePathname, useRouter } from 'next/navigation'
 
 type NavItemProps = {
   title: string
@@ -15,14 +16,17 @@ type NavItemProps = {
 }
 
 function NavItem({ title, icon, href, submenu }: NavItemProps) {
+  const pathname = usePathname()
   const [show, setShow] = useState(false)
+  console.log(pathname)
+
   return (
     <li>
       {submenu ? (
         <React.Fragment>
           <span
             className={classNames('nav-item', {
-              active: false
+              active: pathname.includes(href as string)
             })}
             onClick={() => {
               setShow(!show)
@@ -42,7 +46,7 @@ function NavItem({ title, icon, href, submenu }: NavItemProps) {
                 <li key={item.href}>
                   <Link
                     className={classNames('nav-item', {
-                      active: false
+                      active: item.href === pathname
                     })}
                     href={item.href}
                   >
@@ -57,7 +61,7 @@ function NavItem({ title, icon, href, submenu }: NavItemProps) {
       ) : (
         <Link
           className={classNames('nav-item', {
-            active: href === '/dashboard'
+            active: href === pathname
           })}
           href={href || '#'}
         >

@@ -13,6 +13,8 @@ import { ErrorResponse } from '@/types/utils.type'
 import Link from 'next/link'
 import { InputAuth } from '@/components/common/Input'
 import { ButtonPrimary } from '@/components/common/Button'
+import NProgress from 'nprogress'
+import { toast } from 'react-toastify'
 
 type FormData = Pick<Schema, 'email' | 'password'>
 const loginSchema = schema.pick(['email', 'password'])
@@ -33,14 +35,19 @@ export default function Login() {
     mutationFn: (body: Omit<FormData, 'confirm_password'>) => authApi.loginAccount(body)
   })
   const onSubmit = handleSubmit((data) => {
+    NProgress.start()
     loginMutation.mutate(data, {
       onSuccess: (data) => {
         setIsAuthenticated(true)
         setProfile(data.data.data.profile)
+        NProgress.done()
+        toast.success('Login successful!')
         router.push('/dashboard')
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<null>>(error)) {
+          NProgress.done()
+          toast.error('Login fail!')
           setError('password', { message: error.response?.data.message, type: 'maxLength' })
         }
       }
@@ -77,7 +84,6 @@ export default function Login() {
                 className=''
                 isLoading={loginMutation.isLoading}
                 disabled={loginMutation.isLoading}
-                // full
               >
                 Login
               </ButtonPrimary>

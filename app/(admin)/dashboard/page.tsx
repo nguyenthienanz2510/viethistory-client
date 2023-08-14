@@ -1,18 +1,22 @@
 'use client'
 
-import { Alert } from 'flowbite-react'
 import React from 'react'
+import Alert from '@mui/material/Alert'
+import Stack from '@mui/material/Stack'
+import { toast } from 'react-toastify'
 
 export default function Home() {
+  toast.success('Success Notification !', {
+    position: toast.POSITION.TOP_LEFT
+  })
   return (
     <React.Fragment>
-      <Alert color='info'>Alert!</Alert>
-
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, odio. Reiciendis molestias vero, aliquid
-        accusantium neque tempore quasi dolore qui? Earum dolorum commodi rem tenetur aperiam alias, sed consequuntur
-        itaque?
-      </p>
+      <Stack sx={{ width: '100%' }} spacing={2}>
+        <Alert severity='error'>This is an error alert — check it out!</Alert>
+        <Alert severity='warning'>This is a warning alert — check it out!</Alert>
+        <Alert severity='info'>This is an info alert — check it out!</Alert>
+        <Alert severity='success'>This is a success alert — check it out!</Alert>
+      </Stack>
     </React.Fragment>
   )
 }
