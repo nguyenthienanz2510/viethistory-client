@@ -41,14 +41,14 @@ export default function Login() {
         setIsAuthenticated(true)
         setProfile(data.data.data.profile)
         NProgress.done()
-        toast.success('Login successful!')
         router.push('/dashboard')
+        toast.success('Login successful!')
       },
       onError: (error) => {
         if (isAxiosUnprocessableEntityError<ErrorResponse<null>>(error)) {
           NProgress.done()
-          toast.error('Login fail!')
           setError('password', { message: error.response?.data.message, type: 'maxLength' })
+          toast.error('Login fail!')
         }
       }
     })

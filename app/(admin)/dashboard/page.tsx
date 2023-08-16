@@ -6,9 +6,7 @@ import Stack from '@mui/material/Stack'
 import { toast } from 'react-toastify'
 
 export default function Home() {
-  toast.success('Success Notification !', {
-    position: toast.POSITION.TOP_LEFT
-  })
+  toast('Welcome to Viethistory dashboard')
   return (
     <React.Fragment>
       <Stack sx={{ width: '100%' }} spacing={2}>

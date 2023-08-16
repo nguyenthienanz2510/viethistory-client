@@ -18,7 +18,6 @@ type NavItemProps = {
 function NavItem({ title, icon, href, submenu }: NavItemProps) {
   const pathname = usePathname()
   const [show, setShow] = useState(false)
-  console.log(pathname)
 
   return (
     <li>

@@ -8,6 +8,6 @@ export interface User {
   first_name: string | null
   last_name: string | null
   avatar: string | null
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
 }

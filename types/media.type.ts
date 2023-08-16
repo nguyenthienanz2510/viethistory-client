@@ -1,7 +1,7 @@
 import { User } from './user.type'
 
 export interface Media {
-  id: number
+  id: string
   public_id: string
   filename: string
   resource_type: string
@@ -15,8 +15,8 @@ export interface Media {
   alt: string | null
   description: string | null
   status: string
-  created_at: Date
-  updated_at: Date
+  created_at: string
+  updated_at: string
   user_created_id: string
   user_updated_id: string
   user_created: User

@@ -1,7 +1,11 @@
 .admin-template {
+  background-color: $color-white;
+}
+
+.admin-template {
   table.table-data {
     width: 100%;
-    color: $color-text-primary;
+    color: $color-text-dark;
     th,
     td {
       padding: 8px 16px;
