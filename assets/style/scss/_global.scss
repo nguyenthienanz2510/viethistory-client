@@ -11,6 +11,8 @@ body {
   font-weight: 400;
   background: $color-bg-default;
   color: $color-white;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 body.admin-template {

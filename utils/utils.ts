@@ -2,6 +2,7 @@ import axios, { AxiosError } from 'axios'
 import HttpStatusCode from '@/constants/httpStatusCode.enum'
 import { ErrorResponse } from '@/types/utils.type'
 import { siteConfig } from '@/constants'
+import { useEffect, useRef } from 'react'
 
 export function isAxiosError<T>(error: unknown): error is AxiosError<T> {
   return axios.isAxiosError(error)
@@ -63,6 +64,17 @@ export function isMobile() {
   return /Mobi|Android/i.test(userAgent)
 }
 
-function isXsScreen() {
+export const isXsScreen = () => {
   return window.innerWidth < 767
+}
+
+export const useDimensions = (ref: any) => {
+  const dimensions = useRef({ width: 0, height: 0 })
+
+  useEffect(() => {
+    dimensions.current.width = ref.current.offsetWidth
+    dimensions.current.height = ref.current.offsetHeight
+  }, [ref])
+
+  return dimensions.current
 }
