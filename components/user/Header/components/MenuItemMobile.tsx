@@ -1,4 +1,3 @@
-import * as React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 
@@ -26,7 +25,7 @@ interface Props {
   }
 }
 
-export const MenuItem = ({ item }: Props) => {
+export const MenuItemMobile = ({ item }: Props) => {
   return (
     <motion.li variants={variants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
       <Link className='font-16 inline-block w-full px-5 py-2 uppercase text-color-black' href={item.slug}>
