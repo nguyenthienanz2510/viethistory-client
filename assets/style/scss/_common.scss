@@ -1,13 +1,47 @@
 .text-highlight-primary {
-    color: $color-primary;
+  color: $color-primary;
 }
 
 .underline-primary {
-    text-decoration: underline;
-    text-decoration-color: $color-primary;
+  text-decoration: underline;
+  text-decoration-color: $color-primary;
 }
 
 .underline-secondary {
-    text-decoration: underline;
-    text-decoration-color: $color-secondary;
+  text-decoration: underline;
+  text-decoration-color: $color-secondary;
+}
+
+.article-card {
+  display: inline-block;
+  .article-card-thumb-border {
+    position: absolute;
+    z-index: 1;
+    top: -12px;
+    bottom: -12px;
+    left: 8px;
+    right: 8px;
+    // border: 1px solid $color-secondary;
+    overflow: hidden;
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   width: 40px;
+    //   height: 40px;
+    //   background-color: blue;
+    //   z-index: 2;
+    //   top: -24px;
+    //   right: -24px;
+    //   border: 1px solid $color-secondary;
+    //   transform: rotate(45deg);
+    //   transition: all 0.5s ease;
+    // }
+  }
+//   &:hover {
+//     .article-card-thumb-border::after {
+//       top: -40px;
+//       right: -40px;
+//       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+//     }
+//   }
 }

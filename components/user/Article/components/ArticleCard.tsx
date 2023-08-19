@@ -1,11 +1,11 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
 
 type Props = {}
 
-function Hero({}: Props) {
+const ArticleCard = (props: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
-  const videoHero = 'https://www.leagueoflegends.com/static/hero-c35bd03ceaa5f919e98b20c905044a3d.webm'
-  const videoHeroMp4 = 'https://www.leagueoflegends.com/static/hero-3e934348790824f4b800524f96a93020.mp4'
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -133,18 +133,18 @@ function Hero({}: Props) {
 
       const vertices = [
         { x: 0, y: 0 },
-        { x: canvas.width - 30, y: 0 },
-        { x: canvas.width, y: 30 },
+        { x: canvas.width - 20, y: 0 },
+        { x: canvas.width, y: 20 },
         { x: canvas.width, y: canvas.height },
         { x: 0, y: canvas.height },
         { x: 0, y: 0 }
       ]
       ctx.strokeStyle = '#EC4899'
-      ctx.lineWidth = 2
+      ctx.lineWidth = 1
 
       function draw() {
         cancelAnimationFrame(rafID)
-        drawPolygon(vertices, 20, () => console.log('done'))
+        drawPolygon(vertices, 10, () => console.log('done'))
       }
 
       draw()
@@ -152,28 +152,40 @@ function Hero({}: Props) {
   }, [])
 
   return (
-    <section>
-      <div className='relative p-0 md:p-16'>
-        <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
-          <div className='h-[500px] overflow-hidden md:h-[800px]'>
-            <video className='w-full object-cover object-center blur-md' autoPlay loop muted>
-              <source src={videoHero} type='video/webm' />
-              <source src={videoHeroMp4} type='video/webm' />
-            </video>
+    <article className='article-card'>
+      <Link href={'#'}>
+        <div className='group flex max-w-[900px] py-3 md:gap-10'>
+          <div className='max-w-[420px]'>
+            <div className='relative w-[420px] pt-[56.25%]'>
+              <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
+                <Image
+                  className='transition-transform duration-500 group-hover:scale-105'
+                  src='http://res.cloudinary.com/duc2gaec9/image/upload/v1692362652/league-of-legends-1692362650.jpg'
+                  alt='Article thumb'
+                  title='Article Thumb'
+                  fill
+                />
+              </div>
+              <div className='article-card-thumb-border'>
+                <canvas className='h-full w-full' ref={canvasRef}></canvas>
+              </div>
+            </div>
+          </div>
+          <div className='flex flex-1 flex-col items-center justify-center'>
+            <div className='pb-2'>
+              <p className='uppercase text-color-primary'>World War II</p>
+              <h3 className='mb-2.5 text-24 font-bold text-color-white'>Tiger Tank - Legendary Germany Hihi Muahaha</h3>
+              <p className='mb-2.5 line-clamp-2 text-color-white'>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quaerat quo eligendi totam animi corporis
+                pariatur placeat et culpa repellat.
+              </p>
+              <p className='mb-2.5 font-semibold text-color-white'>18-08-2023 10:10:10</p>
+            </div>
           </div>
         </div>
-        <div className='relative z-[1] mx-auto max-w-[1600px]'>
-          <video className='h-[500px] w-full object-cover object-center md:h-[800px]' autoPlay loop muted>
-            <source src={videoHero} type='video/webm' />
-          </video>
-          <div className='absolute -bottom-4 -top-4 left-4 right-4 z-[2] hidden md:block'>
-            <canvas className='h-full w-full' ref={canvasRef}></canvas>
-            <source src={videoHeroMp4} type='video/webm' />
-          </div>
-        </div>
-      </div>
-    </section>
+      </Link>
+    </article>
   )
 }
 
-export default Hero
+export default ArticleCard
