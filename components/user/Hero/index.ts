@@ -1,3 +1,3 @@
-import Hero from './Hero'
+import HomeHero from './HomeHero'
 
-export default Hero
+export default HomeHero

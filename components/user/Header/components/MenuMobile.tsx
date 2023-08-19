@@ -6,7 +6,14 @@ import { NavigationMobile } from './NavigationMobile'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
-export const MenuMobile = () => {
+interface Props {
+  menu: {
+    name: string
+    slug: string
+  }[]
+}
+
+export const MenuMobile = ({ menu }: Props) => {
   const [isOpen, toggleOpen] = useCycle(false, true)
   const [isClosing, setIsClosing] = useState(false)
   const widthDevice = typeof window !== 'undefined' && window.innerWidth < 420 ? window.innerWidth - 32 : 420 - 32
@@ -53,7 +60,7 @@ export const MenuMobile = () => {
         )}
       >
         <motion.div className='absolute bottom-0 right-0 top-0 w-full bg-color-white' variants={sidebar} />
-        <NavigationMobile />
+        <NavigationMobile menu={menu} />
       </div>
       <MenuToggle
         toggle={() => {

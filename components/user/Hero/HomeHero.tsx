@@ -156,19 +156,17 @@ function Hero({}: Props) {
       <div className='relative p-0 md:p-16'>
         <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
           <div className='h-[500px] overflow-hidden md:h-[800px]'>
-            <video className='w-full object-cover object-center blur-md' autoPlay loop muted>
+            <video className='w-full object-cover object-center blur-md' playsInline autoPlay loop muted>
               <source src={videoHero} type='video/webm' />
-              <source src={videoHeroMp4} type='video/webm' />
             </video>
           </div>
         </div>
         <div className='relative z-[1] mx-auto max-w-[1600px]'>
-          <video className='h-[500px] w-full object-cover object-center md:h-[800px]' autoPlay loop muted>
+          <video className='h-[500px] w-full object-cover object-center md:h-[800px]' playsInline autoPlay loop muted>
             <source src={videoHero} type='video/webm' />
           </video>
           <div className='absolute -bottom-4 -top-4 left-4 right-4 z-[2] hidden md:block'>
             <canvas className='h-full w-full' ref={canvasRef}></canvas>
-            <source src={videoHeroMp4} type='video/webm' />
           </div>
         </div>
       </div>

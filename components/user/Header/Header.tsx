@@ -1,12 +1,30 @@
+'use client'
+
 import Link from 'next/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { MenuMobile } from './components/MenuMobile'
+import { Navigation } from './components/Navigation'
 
 type Props = {}
 
 function Header({}: Props) {
+  const primaryMenu = [
+    {
+      name: 'Home',
+      slug: '/'
+    },
+    {
+      name: 'Article',
+      slug: 'article'
+    },
+    {
+      name: 'About',
+      slug: 'about'
+    }
+  ]
+
   return (
     <header className='sticky top-0 z-[1000] w-full flex-none border-b border-slate-800 bg-color-black/80 text-color-white backdrop-blur transition-colors duration-500 lg:z-50 lg:border-b'>
       <div className='flex h-16 w-full items-center justify-between px-4 lg:container lg:h-20'>
@@ -16,19 +34,7 @@ function Header({}: Props) {
           </Link>
         </div>
         <div className='hidden items-center lg:flex'>
-          <nav>
-            <ul className='flex'>
-              <li className='ml-6 font-bold uppercase'>
-                <Link href={'/'}>Home</Link>
-              </li>
-              <li className='ml-6 font-bold uppercase'>
-                <Link href={'/articles'}>Articles</Link>
-              </li>
-              <li className='ml-6 font-bold uppercase'>
-                <Link href={'/resume'}>Resume</Link>
-              </li>
-            </ul>
-          </nav>
+          <Navigation menu={primaryMenu} />
           <div className='flex'>
             <div className='ml-7 h-7 w-[1px] bg-slate-800' />
             <button className='ml-7 transition-all hover:text-color-primary'>
@@ -36,7 +42,7 @@ function Header({}: Props) {
             </button>
           </div>
         </div>
-        <MenuMobile />
+        <MenuMobile menu={primaryMenu} />
       </div>
     </header>
   )

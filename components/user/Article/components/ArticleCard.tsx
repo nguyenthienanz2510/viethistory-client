@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 
 type Props = {}
 
@@ -152,9 +153,9 @@ const ArticleCard = (props: Props) => {
   }, [])
 
   return (
-    <article className='article-card'>
+    <motion.article className='article-card' whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
       <Link href={'#'}>
-        <div className='group flex w-full flex-wrap gap-6 py-3 md:max-w-[900px] md:gap-10'>
+        <div className='group flex w-full flex-wrap gap-8 py-3 md:max-w-[900px] md:gap-10'>
           <div className='w-full md:max-w-[420px]'>
             <div className='relative w-full pt-[56.25%] md:w-[420px]'>
               <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
@@ -173,18 +174,20 @@ const ArticleCard = (props: Props) => {
           </div>
           <div className='flex flex-1 flex-col items-center justify-center'>
             <div className='px-2 md:px-0 md:pb-2'>
-              <p className='uppercase text-color-primary'>World War II</p>
-              <h3 className='mb-2.5 text-24 font-bold text-color-white'>Tiger Tank - Legendary Germany Hihi Muahaha</h3>
-              <p className='mb-2.5 line-clamp-2 text-color-white'>
+              <p className='mb-1 text-14 uppercase text-color-primary md:text-14'>World War II</p>
+              <h3 className='mb-2.5 text-16 font-bold text-color-white md:text-24'>
+                Tiger Tank - Legendary Germany Hihi Muahaha
+              </h3>
+              <p className='mb-2.5 line-clamp-2 text-14 text-color-white md:text-16'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quaerat quo eligendi totam animi corporis
                 pariatur placeat et culpa repellat.
               </p>
-              <p className='mb-2.5 font-semibold text-color-white'>18-08-2023 10:10:10</p>
+              <p className='text-14 font-light italic text-color-white md:text-16'>18-08-2023 10:10:10</p>
             </div>
           </div>
         </div>
       </Link>
-    </article>
+    </motion.article>
   )
 }
 
