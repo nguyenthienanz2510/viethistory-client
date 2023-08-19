@@ -22,7 +22,7 @@ module.exports = {
         xl: '1440px'
       },
       padding: {
-        DEFAULT: '12px',
+        DEFAULT: '15px',
         sm: '0'
       }
     },
@@ -43,7 +43,9 @@ module.exports = {
         'color-success': '#03a66d',
         'color-info': '#17a2b8',
         'color-warning': '#ffc107',
-        'color-danger': '#cf304a'
+        'color-danger': '#cf304a',
+
+        'color-border-primary': '#c1c1c1'
       },
       fontSize: {
         10: '10px',

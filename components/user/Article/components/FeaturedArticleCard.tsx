@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 
 type Props = {}
 
-const ArticleCard = (props: Props) => {
+const FeaturedArticleCard = (props: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
@@ -153,11 +153,15 @@ const ArticleCard = (props: Props) => {
   }, [])
 
   return (
-    <motion.article className='article-card' whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+    <motion.article
+      className='featured-article-card relative col-span-1 min-w-[320px] md:min-w-[360px]'
+      whileHover={{ scale: 1.03 }}
+      whileTap={{ scale: 0.97 }}
+    >
       <Link href={'#'}>
-        <div className='group flex w-full flex-wrap gap-8 py-3 md:max-w-[900px] md:gap-10'>
-          <div className='w-full md:max-w-[420px]'>
-            <div className='relative w-full pt-[56.25%] md:w-[420px]'>
+        <div className='group relative flex w-full py-3'>
+          <div className='w-[120px] flex-shrink-0 md:w-[160px]'>
+            <div className='relative w-full pt-[100%]'>
               <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
                 <Image
                   className='object-cover transition-transform duration-500'
@@ -167,23 +171,23 @@ const ArticleCard = (props: Props) => {
                   fill
                 />
               </div>
-              <div className='article-card-thumb-border'>
-                <canvas className='h-full w-full' ref={canvasRef}></canvas>
-              </div>
             </div>
           </div>
-          <div className='flex flex-1 flex-col items-center justify-center'>
+          <div className='flex flex-1 flex-col px-3'>
             <div className='px-2 md:px-0 md:pb-2'>
-              <p className='mb-1 text-14 uppercase text-color-primary md:text-14'>World War II</p>
-              <h3 className='mb-2.5 line-clamp-2 text-16 font-bold text-color-white md:text-24'>
+              <p className='mb-1 text-12 uppercase text-color-primary md:text-12'>World War II</p>
+              <h3 className='mb-2.5 line-clamp-2 text-14 font-bold text-color-white md:text-18'>
                 Tiger Tank - Legendary Germany Hihi Muahaha
               </h3>
-              <p className='mb-2.5 line-clamp-2 text-14 text-color-white md:text-16'>
+              <p className='mb-2.5 line-clamp-2 text-12 text-color-white md:text-14'>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi quaerat quo eligendi totam animi corporis
                 pariatur placeat et culpa repellat.
               </p>
-              <p className='text-14 font-light italic text-color-white md:text-16'>18-08-2023 10:10:10</p>
+              <p className='text-12 font-light italic text-color-white md:text-14'>18-08-2023 10:10:10</p>
             </div>
+          </div>
+          <div className='featured-article-card-border'>
+            <canvas className='h-full w-full' ref={canvasRef}></canvas>
           </div>
         </div>
       </Link>
@@ -191,4 +195,4 @@ const ArticleCard = (props: Props) => {
   )
 }
 
-export default ArticleCard
+export default FeaturedArticleCard

@@ -139,8 +139,8 @@ function Hero({}: Props) {
         { x: 0, y: canvas.height },
         { x: 0, y: 0 }
       ]
-      ctx.strokeStyle = '#EC4899'
-      ctx.lineWidth = 2
+      ctx.strokeStyle = '#c1c1c1'
+      ctx.lineWidth = 1
 
       function draw() {
         cancelAnimationFrame(rafID)

@@ -45,3 +45,37 @@
 //     }
 //   }
 }
+
+.featured-article-card {
+  display: inline-block;
+  .featured-article-card-border {
+    position: absolute;
+    z-index: 1;
+    top: 0px;
+    bottom: 0px;
+    left: 8px;
+    right: 0;
+    // border: 1px solid $color-secondary;
+    overflow: hidden;
+    // &::after {
+    //   content: '';
+    //   position: absolute;
+    //   width: 40px;
+    //   height: 40px;
+    //   background-color: blue;
+    //   z-index: 2;
+    //   top: -24px;
+    //   right: -24px;
+    //   border: 1px solid $color-secondary;
+    //   transform: rotate(45deg);
+    //   transition: all 0.5s ease;
+    // }
+  }
+//   &:hover {
+//     .article-card-thumb-border::after {
+//       top: -40px;
+//       right: -40px;
+//       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+//     }
+//   }
+}
