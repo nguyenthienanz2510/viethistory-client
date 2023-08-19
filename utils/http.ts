@@ -73,7 +73,6 @@ export class Http {
           this.accessToken = ''
           this.refreshToken = ''
           clearLS()
-          console.log(URL_LOGOUT)
         }
 
         return response

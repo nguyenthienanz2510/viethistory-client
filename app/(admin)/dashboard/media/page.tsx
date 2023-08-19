@@ -18,8 +18,6 @@ function Media({}: Props) {
     staleTime: 5 * 60 * 1000
   })
 
-  console.log(mediaData)
-
   return (
     <div>
       <h1 className='mb-10'>Media</h1>

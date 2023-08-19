@@ -3,9 +3,12 @@
 import { motion, useCycle } from 'framer-motion'
 import { MenuToggle } from './MenuToggle'
 import { NavigationMobile } from './NavigationMobile'
+import classNames from 'classnames'
+import { useEffect, useRef, useState } from 'react'
 
 export const MenuMobile = () => {
   const [isOpen, toggleOpen] = useCycle(false, true)
+  const [isClosing, setIsClosing] = useState(false)
   const widthDevice = typeof window !== 'undefined' && window.innerWidth < 420 ? window.innerWidth - 32 : 420 - 32
 
   let sidebar = {
@@ -18,7 +21,7 @@ export const MenuMobile = () => {
       }
     }),
     closed: {
-      clipPath: `circle(24px at ${widthDevice}px 32px)`,
+      clipPath: `circle(0px at ${widthDevice}px 32px)`,
       transition: {
         delay: 0.5,
         type: 'spring',
@@ -28,21 +31,35 @@ export const MenuMobile = () => {
     }
   }
 
+  useEffect(() => {
+    if (!isOpen) {
+      setTimeout(() => {
+        setIsClosing(true)
+      }, 1000)
+    } else {
+      setIsClosing(false)
+    }
+    return () => {
+      clearTimeout
+    }
+  }, [isOpen])
+
   return (
-    <motion.nav
-      className='fixed bottom-0 right-0 top-0 block h-screen w-full max-w-[420px] overflow-hidden lg:hidden'
-      initial={false}
-      animate={isOpen ? 'open' : 'closed'}
-      custom={2000}
-    >
-      <motion.div className='absolute bottom-0 right-0 top-0 w-full bg-color-white' variants={sidebar} />
-      <NavigationMobile />
+    <motion.div className=' lg:hidden' initial={false} animate={isOpen ? 'open' : 'closed'} custom={2000}>
+      <div
+        className={classNames(
+          'fixed bottom-0 right-0 top-0 h-screen w-full max-w-[420px] overflow-hidden transition-all',
+          { hidden: isClosing, show: isOpen }
+        )}
+      >
+        <motion.div className='absolute bottom-0 right-0 top-0 w-full bg-color-white' variants={sidebar} />
+        <NavigationMobile />
+      </div>
       <MenuToggle
         toggle={() => {
-          console.log('first')
           toggleOpen()
         }}
       />
-    </motion.nav>
+    </motion.div>
   )
 }

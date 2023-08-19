@@ -144,7 +144,7 @@ const ArticleCard = (props: Props) => {
 
       function draw() {
         cancelAnimationFrame(rafID)
-        drawPolygon(vertices, 10, () => console.log('done'))
+        drawPolygon(vertices, 10, () => {})
       }
 
       draw()
@@ -154,9 +154,9 @@ const ArticleCard = (props: Props) => {
   return (
     <article className='article-card'>
       <Link href={'#'}>
-        <div className='group flex max-w-[900px] py-3 md:gap-10'>
-          <div className='max-w-[420px]'>
-            <div className='relative w-[420px] pt-[56.25%]'>
+        <div className='group flex w-full flex-wrap gap-6 py-3 md:max-w-[900px] md:gap-10'>
+          <div className='w-full md:max-w-[420px]'>
+            <div className='relative w-full pt-[56.25%] md:w-[420px]'>
               <div className='absolute bottom-0 left-0 right-0 top-0 overflow-hidden'>
                 <Image
                   className='transition-transform duration-500 group-hover:scale-105'
@@ -172,7 +172,7 @@ const ArticleCard = (props: Props) => {
             </div>
           </div>
           <div className='flex flex-1 flex-col items-center justify-center'>
-            <div className='pb-2'>
+            <div className='px-2 md:px-0 md:pb-2'>
               <p className='uppercase text-color-primary'>World War II</p>
               <h3 className='mb-2.5 text-24 font-bold text-color-white'>Tiger Tank - Legendary Germany Hihi Muahaha</h3>
               <p className='mb-2.5 line-clamp-2 text-color-white'>

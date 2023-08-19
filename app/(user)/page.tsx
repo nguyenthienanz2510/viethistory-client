@@ -8,7 +8,6 @@ import { toast } from 'react-toastify'
 export default function Home() {
   useEffect(() => {
     toast('Welcome to Viethistory!')
-    console.log('toast')
   }, [])
   return (
     <>

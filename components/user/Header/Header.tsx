@@ -8,7 +8,7 @@ type Props = {}
 
 function Header({}: Props) {
   return (
-    <header className='supports-backdrop-blur:bg-white/60 sticky top-0 z-[1000] w-full flex-none border-b border-slate-800 bg-transparent text-color-white backdrop-blur transition-colors duration-500 lg:z-50 lg:border-b'>
+    <header className='sticky top-0 z-[1000] w-full flex-none border-b border-slate-800 bg-color-black/80 text-color-white backdrop-blur transition-colors duration-500 lg:z-50 lg:border-b'>
       <div className='flex h-16 w-full items-center justify-between px-4 lg:container lg:h-20'>
         <div>
           <Link href={'/'}>

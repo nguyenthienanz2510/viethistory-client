@@ -6,8 +6,8 @@ type Props = {}
 const LatestArticle = (props: Props) => {
   const latestArticle = [1, 2, 3]
   return (
-    <section className='py-16'>
-      <div className='container space-y-20'>
+    <section className='py-12 md:py-16'>
+      <div className='container space-y-10 md:space-y-20'>
         {latestArticle.map((article) => {
           return <ArticleCard key={article} />
         })}

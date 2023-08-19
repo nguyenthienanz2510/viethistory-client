@@ -144,7 +144,7 @@ function Hero({}: Props) {
 
       function draw() {
         cancelAnimationFrame(rafID)
-        drawPolygon(vertices, 20, () => console.log('done'))
+        drawPolygon(vertices, 20, () => {})
       }
 
       draw()
