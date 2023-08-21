@@ -1,27 +1,30 @@
-'use client'
-
 import Link from 'next/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { MenuMobile } from './components/MenuMobile'
 import { Navigation } from './components/Navigation'
+import { LanguageChanger } from '@/components/common/LanguageChanger'
+import useIntl from '@/app/intl'
 
 type Props = {}
 
-function Header({}: Props) {
+async function Header({}: Props) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const intl = await useIntl('common')
+
   const primaryMenu = [
     {
-      name: 'Home',
+      name: intl.formatMessage({ id: 'Home' }),
       slug: '/'
     },
     {
-      name: 'Article',
-      slug: 'article'
+      name: intl.formatMessage({ id: 'Articles' }),
+      slug: 'articles'
     },
     {
-      name: 'About',
-      slug: 'about'
+      name: intl.formatMessage({ id: 'Contact' }),
+      slug: 'contact'
     }
   ]
 
@@ -37,6 +40,7 @@ function Header({}: Props) {
           <Navigation menu={primaryMenu} />
           <div className='flex'>
             <div className='ml-7 h-7 w-[1px] bg-slate-800' />
+            <LanguageChanger />
             <button className='ml-7 transition-all hover:text-color-primary'>
               <FontAwesomeIcon icon={faCircleUser} size='2xl' />
             </button>

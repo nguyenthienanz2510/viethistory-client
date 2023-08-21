@@ -1,5 +1,3 @@
-'use client'
-
 import { config } from '@fortawesome/fontawesome-svg-core'
 import Providers from '@/utils/hoc/Providers'
 import { ToastContainer } from 'react-toastify'
@@ -19,7 +17,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang='en'>
+    <html>
       <body>
         <Providers>
           {children}
