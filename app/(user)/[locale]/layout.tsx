@@ -16,9 +16,9 @@ import NavigationEvents from '@/components/common/NavigationEvents'
 import Footer from '@/components/user/Footer'
 import Header from '@/components/user/Header'
 
-// export function generateStaticParams() {
-//   return [{ locale: 'en' }, { locale: 'vi' }]
-// }
+export function generateStaticParams() {
+  return [{ locale: 'en' }, { locale: 'vi' }]
+}
 
 const loadMessages = async (locale: string) => {
   const url = `https://api.i18nexus.com/project_resources/translations/${locale}.json?api_key=${process.env.I18NEXUS_API_KEY}`

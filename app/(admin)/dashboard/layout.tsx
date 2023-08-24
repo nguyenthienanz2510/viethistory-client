@@ -23,7 +23,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export default function AdminLayout({ children }: Props) {
+export default async function AdminLayout({ children }: Props) {
   return (
     <html lang='en'>
       <body>
