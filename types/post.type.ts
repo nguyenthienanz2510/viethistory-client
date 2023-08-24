@@ -1,3 +1,4 @@
+import { Media } from './media.type'
 import { User } from './user.type'
 
 export interface Post {
@@ -6,7 +7,8 @@ export interface Post {
   slug: string
   description: string
   status: string
-  thumb: string
+  thumb_id: string
+  thumb: Media
   images: string
   content: string
   timestamp: string
@@ -20,16 +22,9 @@ export interface Post {
   user_updated_id: string
   user_created: User
   user_updated: User
-  translations: PostTranslations[]
+  translations: PostTranslations
 }
 
 interface PostTranslations {
-  id: number
-  post_id: number
-  language_code: string
-  title: string
-  description: string
-  content: string
-  meta_title: string
-  meta_description: string
+  vi: Post
 }

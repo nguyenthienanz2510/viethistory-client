@@ -168,9 +168,8 @@ const ArticleCard = ({ article }: Props) => {
                 <Image
                   className='object-cover transition-transform duration-500'
                   src={
-                    article.thumb
-                      ? article.thumb
-                      : 'http://res.cloudinary.com/duc2gaec9/image/upload/v1692362652/league-of-legends-1692362650.jpg'
+                    article.thumb.url ||
+                    'http://res.cloudinary.com/duc2gaec9/image/upload/v1692362652/league-of-legends-1692362650.jpg'
                   }
                   alt={article.title}
                   title={article.title}
@@ -185,8 +184,14 @@ const ArticleCard = ({ article }: Props) => {
           <div className='flex flex-1 flex-col items-center justify-center'>
             <div className='px-2 md:px-0 md:pb-2'>
               <p className='mb-1 text-14 uppercase text-color-primary md:text-14'>{article.title}</p>
-              <h3 className='mb-2.5 line-clamp-2 text-16 font-bold text-color-white md:text-24'>{article.title}</h3>
-              <p className='mb-2.5 line-clamp-2 text-14 text-color-white md:text-16'>{article.description}</p>
+              <h3
+                className='mb-2.5 line-clamp-2 text-16 font-bold text-color-white md:text-24'
+                dangerouslySetInnerHTML={{ __html: article.title }}
+              />
+              <p
+                className='mb-2.5 line-clamp-2 text-14 text-color-white md:text-16'
+                dangerouslySetInnerHTML={{ __html: article.description }}
+              />
               <p className='text-14 font-light italic text-color-white md:text-16'>
                 {convertDateTimeIsoStringToCustomFormat(article.created_at)}
               </p>

@@ -19,31 +19,13 @@ async function getData() {
 }
 
 export default async function Articles({ params }: Props) {
+  const { locale } = params
   const data = await getData()
   let latestArticle = data.data.posts
 
-  if (params.locale === 'vi') {
-    latestArticle = latestArticle.map((article: Post) => {
-      if (!article.translations?.length) {
-        return article
-      } else {
-        const translations = article.translations[0]
-        const articleTranslation = {
-          ...article,
-          title: translations.title,
-          description: translations.description,
-          content: translations.content,
-          meta_description: translations.meta_description,
-          meta_title: translations.meta_title
-        }
-        return articleTranslation
-      }
-    })
-  }
-
   return (
     <div>
-      <LatestArticle latestArticle={latestArticle} />
+      <LatestArticle locale={locale} latestArticle={latestArticle} />
     </div>
   )
 }
