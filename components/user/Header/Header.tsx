@@ -1,29 +1,27 @@
-import Link from 'next/link'
+'use client'
+
+import Link from 'next-intl/link'
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleUser } from '@fortawesome/free-solid-svg-icons'
 import { MenuMobile } from './components/MenuMobile'
 import { Navigation } from './components/Navigation'
 import { LanguageChanger } from '@/components/common/LanguageChanger'
-import useIntl from '@/app/intl'
 
 type Props = {}
 
-async function Header({}: Props) {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
-  const intl = await useIntl('common')
-
+function Header({}: Props) {
   const primaryMenu = [
     {
-      name: intl.formatMessage({ id: 'Home' }),
+      name: 'Home',
       slug: '/'
     },
     {
-      name: intl.formatMessage({ id: 'Articles' }),
+      name: 'Articles',
       slug: 'articles'
     },
     {
-      name: intl.formatMessage({ id: 'Contact' }),
+      name: 'Contact',
       slug: 'contact'
     }
   ]

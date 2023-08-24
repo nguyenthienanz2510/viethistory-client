@@ -20,7 +20,7 @@ export const MenuMobile = ({ menu }: Props) => {
 
   let sidebar = {
     open: () => ({
-      clipPath: `circle(2000px at ${widthDevice}px 32px)`,
+      clipPath: `circle(${typeof window !== 'undefined' && window.innerHeight * 2}px at ${widthDevice}px 32px)`,
       transition: {
         type: 'spring',
         stiffness: 20,
@@ -42,7 +42,7 @@ export const MenuMobile = ({ menu }: Props) => {
     if (!isOpen) {
       setTimeout(() => {
         setIsClosing(true)
-      }, 1000)
+      }, 700)
     } else {
       setIsClosing(false)
     }
@@ -51,8 +51,18 @@ export const MenuMobile = ({ menu }: Props) => {
     }
   }, [isOpen])
 
+  const closeMenu = () => {
+    toggleOpen()
+    setIsClosing(true)
+  }
+
   return (
-    <motion.div className=' lg:hidden' initial={false} animate={isOpen ? 'open' : 'closed'} custom={2000}>
+    <motion.div
+      className='lg:hidden'
+      initial={false}
+      animate={isOpen ? 'open' : 'closed'}
+      custom={typeof window !== 'undefined' && window.innerHeight}
+    >
       <div
         className={classNames(
           'fixed bottom-0 right-0 top-0 h-screen w-full max-w-[420px] overflow-hidden transition-all',
@@ -60,7 +70,7 @@ export const MenuMobile = ({ menu }: Props) => {
         )}
       >
         <motion.div className='absolute bottom-0 right-0 top-0 w-full bg-color-white' variants={sidebar} />
-        <NavigationMobile menu={menu} />
+        <NavigationMobile menu={menu} closeMenu={closeMenu} />
       </div>
       <MenuToggle
         toggle={() => {

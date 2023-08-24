@@ -1,14 +1,14 @@
 'use client'
-import { useRouter } from 'next/navigation'
-import { usePathname } from 'next/navigation'
-import { useCurrentLocale } from 'next-i18n-router/client'
+
 import { faLanguage, faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'react-toastify'
 import { motion } from 'framer-motion'
-const i18nConfig = require('@/i18nConfig.ts') // Update the path to your i18nConfig file
+import { useRouter } from 'next-intl/client'
+import { usePathname } from 'next-intl/client'
+import { useLocale } from 'next-intl'
 
 const locales = [
   {
@@ -23,15 +23,14 @@ const locales = [
 
 export default function LanguageChanger() {
   const router = useRouter()
-  const currentPathname = usePathname()
-  const currentLocale = useCurrentLocale(i18nConfig)
-
-  const popupRef = useRef<HTMLUListElement>(null)
+  const pathname = usePathname()
+  const currentLocale = useLocale()
+  const selectLanguageRef = useRef<HTMLUListElement>(null)
   const [showPopup, setShowPopup] = useState(false)
 
   useEffect(() => {
     let handler = (e: MouseEvent) => {
-      if (!popupRef.current?.contains(e.target as Node)) {
+      if (!selectLanguageRef.current?.contains(e.target as Node)) {
         setShowPopup(false)
       }
     }
@@ -44,22 +43,8 @@ export default function LanguageChanger() {
   })
 
   const handleChange = (newLocale: string) => {
-    setShowPopup(!showPopup)
-    // set cookie for next-i18n-router
-    const days = 30
-    const date = new Date()
-    date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000)
-    const expires = '; expires=' + date.toUTCString()
-    document.cookie = `NEXT_LOCALE=${newLocale};expires=${expires};path=/`
-
-    if (currentLocale === i18nConfig.defaultLocale) {
-      router.push('/' + newLocale + currentPathname)
-    } else {
-      router.push(currentPathname.replace(`/${currentLocale}`, `/${newLocale}`))
-    }
-    locales.forEach((locale) => {
-      locale.code === newLocale && toast(`Current language is ${locale.name}`)
-    })
+    router.push(pathname, { locale: newLocale })
+    toast(`Current language is ${newLocale === 'en' ? 'English' : 'Vietnamese'}`)
   }
 
   return (
@@ -73,14 +58,14 @@ export default function LanguageChanger() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          ref={popupRef}
+          ref={selectLanguageRef}
         >
           {locales.map((locale) => {
             return (
               <li key={locale.code}>
                 <button
                   className={classNames(
-                    'flex w-full items-center justify-between px-4 py-1 hover:bg-color-primary/10',
+                    'flex w-full items-center justify-between px-4 py-2 hover:bg-color-primary/10',
                     {
                       'bg-color-primary/10 font-bold text-color-primary': locale.code === currentLocale
                     }

@@ -1,12 +1,14 @@
 import * as React from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import { useTranslations } from 'next-intl'
 
 interface Props {
   menu: {
     name: string
     slug: string
   }[]
+  closeMenu: () => void
 }
 
 const ulVariants = {
@@ -35,14 +37,24 @@ const liVariants = {
   }
 }
 
-export const NavigationMobile = ({ menu }: Props) => (
-  <motion.ul className='absolute bottom-0 left-0 right-0 top-0 pt-16' variants={ulVariants}>
-    {menu.map((item) => (
-      <motion.li key={item.slug} variants={liVariants} whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-        <Link className='font-16 inline-block w-full px-5 py-2 uppercase text-color-black' href={item.slug}>
-          {item.name}
-        </Link>
-      </motion.li>
-    ))}
-  </motion.ul>
-)
+export const NavigationMobile = ({ menu, closeMenu }: Props) => {
+  const t = useTranslations('common')
+
+  return (
+    <motion.ul className='absolute bottom-0 left-0 right-0 top-0 pt-16' variants={ulVariants}>
+      {menu.map((item) => (
+        <motion.li key={item.slug} variants={liVariants} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+          <Link
+            className='font-16 inline-block w-full px-5 py-2 font-semibold uppercase text-color-black'
+            href={item.slug}
+            onClick={() => {
+              closeMenu()
+            }}
+          >
+            {t(item.name)}
+          </Link>
+        </motion.li>
+      ))}
+    </motion.ul>
+  )
+}

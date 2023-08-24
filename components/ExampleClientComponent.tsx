@@ -1,11 +1,13 @@
 'use client'
 
-import { FormattedMessage } from 'react-intl'
+import { useTranslations } from 'next-intl'
 
 export default function ExampleClientComponent() {
+  const t = useTranslations('common')
   return (
-    <h2>
-      <FormattedMessage id='Welcome to Viethistory' />
-    </h2>
+    <div>
+      <h2>Welcome to Viethistory</h2>
+      <h2>{t('Welcome to Viethistory')}</h2>
+    </div>
   )
 }
