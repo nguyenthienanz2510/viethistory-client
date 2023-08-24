@@ -9,13 +9,18 @@ type Props = {
 }
 
 async function getData() {
-  const res = await fetch('https://viethistory-api.cyclic.app/posts')
+  try {
+    const res = await fetch('https://viethistory-api.cyclic.app/posts')
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+  } catch (error) {
+    console.error('Fetch error:', error)
+    throw error
   }
-
-  return res.json()
 }
 
 export default async function Articles({ params }: Props) {

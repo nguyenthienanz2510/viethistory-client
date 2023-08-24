@@ -5,23 +5,35 @@ import React from 'react'
 type Props = {
   params: {
     slug: string
+    locale: string
   }
 }
 
 export const revalidate = 60
 
-async function getData() {
+async function getData(slug?: string) {
+  try {
+    const res = await fetch(`https://viethistory-api.cyclic.app/posts?slug=${slug}`)
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch data')
+    }
+
+    return res.json()
+  } catch (error) {
+    console.error('Fetch error:', error)
+    throw error
+  }
+}
+
+export async function generateStaticParams() {
   const res = await fetch('https://viethistory-api.cyclic.app/posts')
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
   }
 
-  return res.json()
-}
-
-export async function generateStaticParams() {
-  const allPosts = await getData()
+  const allPosts = await res.json()
 
   const slugRoutes = allPosts.data.posts.map((post: Post) => {
     return post.slug
@@ -51,12 +63,20 @@ export async function generateStaticParams() {
 //   }
 // }
 
-export default async function ArticleDetail({ params: { slug } }: Props) {
-  //   if (post == null) {
-  //     return null
-  //   }
-
-  console.log(slug)
-
-  return <article>{slug}</article>
+export default async function ArticleDetail({ params: { slug, locale } }: Props) {
+  const data = await getData(slug)
+  let articleDetail: Post = data.data.post
+  console.log(data)
+  if (locale !== 'en') {
+    articleDetail = articleDetail.translations.vi
+    console.log(articleDetail.translations)
+  }
+  return (
+    <div className='container py-20'>
+      <article>
+        <h1 className='mb-5 text-32 font-bold'>{articleDetail.title}</h1>
+        <div dangerouslySetInnerHTML={{ __html: articleDetail.content }} />
+      </article>
+    </div>
+  )
 }
