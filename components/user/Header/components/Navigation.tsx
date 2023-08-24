@@ -19,7 +19,7 @@ export const Navigation = ({ menu }: Props) => {
       <ul className='flex'>
         {menu.map((item) => (
           <li key={item.slug}>
-            <Link className='ml-6 font-bold uppercase' href={item.slug}>
+            <Link className='ml-6 font-bold uppercase' href={`/${item.slug}`}>
               {t(item.name)}
             </Link>
           </li>

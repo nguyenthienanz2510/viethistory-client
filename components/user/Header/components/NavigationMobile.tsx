@@ -46,7 +46,7 @@ export const NavigationMobile = ({ menu, closeMenu }: Props) => {
         <motion.li key={item.slug} variants={liVariants} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
           <Link
             className='font-16 inline-block w-full px-5 py-2 font-semibold uppercase text-color-black'
-            href={item.slug}
+            href={`/${item.slug}`}
             onClick={() => {
               closeMenu()
             }}

@@ -13,7 +13,7 @@ export default function Home() {
     <>
       <HomeHero />
       <FeaturedArticle />
-      <LatestArticle />
+      {/* <LatestArticle /> */}
     </>
   )
 }

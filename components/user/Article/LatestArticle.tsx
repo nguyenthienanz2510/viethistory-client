@@ -1,15 +1,17 @@
 import React from 'react'
 import ArticleCard from './components/ArticleCard'
+import { Post } from '@/types/post.type'
 
-type Props = {}
+type Props = {
+  latestArticle: any
+}
 
-const LatestArticle = (props: Props) => {
-  const latestArticle = [1, 2, 3]
+const LatestArticle = ({ latestArticle }: Props) => {
   return (
     <section className='py-12 md:py-16'>
       <div className='container space-y-10 md:space-y-20'>
-        {latestArticle.map((article) => {
-          return <ArticleCard key={article} />
+        {latestArticle.map((article: Post) => {
+          return <ArticleCard key={article.id} article={article} />
         })}
       </div>
     </section>

@@ -78,3 +78,22 @@ export const useDimensions = (ref: any) => {
 
   return dimensions.current
 }
+
+export const convertDateTimeIsoStringToCustomFormat = (isoString: string) => {
+  const date = new Date(isoString)
+  const options = {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: true
+  } as const
+
+  return new Intl.DateTimeFormat('en-US', options)
+    .format(date)
+    .replace(',', '')
+    .replace(/\//g, '-')
+    .replace(/\s+/g, ' ')
+}

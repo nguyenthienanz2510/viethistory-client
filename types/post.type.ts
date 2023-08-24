@@ -1,7 +1,7 @@
 import { User } from './user.type'
 
 export interface Post {
-  id: string
+  id: number
   title: string
   slug: string
   description: string
@@ -20,4 +20,16 @@ export interface Post {
   user_updated_id: string
   user_created: User
   user_updated: User
+  translations: PostTranslations[]
+}
+
+interface PostTranslations {
+  id: number
+  post_id: number
+  language_code: string
+  title: string
+  description: string
+  content: string
+  meta_title: string
+  meta_description: string
 }
