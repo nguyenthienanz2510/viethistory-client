@@ -21,29 +21,8 @@
     bottom: -12px;
     left: 8px;
     right: 8px;
-    // border: 1px solid $color-secondary;
     overflow: hidden;
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   width: 40px;
-    //   height: 40px;
-    //   background-color: blue;
-    //   z-index: 2;
-    //   top: -24px;
-    //   right: -24px;
-    //   border: 1px solid $color-secondary;
-    //   transform: rotate(45deg);
-    //   transition: all 0.5s ease;
-    // }
   }
-//   &:hover {
-//     .article-card-thumb-border::after {
-//       top: -40px;
-//       right: -40px;
-//       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-//     }
-//   }
 }
 
 .featured-article-card {
@@ -55,27 +34,92 @@
     bottom: 0px;
     left: 8px;
     right: 0;
-    // border: 1px solid $color-secondary;
     overflow: hidden;
-    // &::after {
-    //   content: '';
-    //   position: absolute;
-    //   width: 40px;
-    //   height: 40px;
-    //   background-color: blue;
-    //   z-index: 2;
-    //   top: -24px;
-    //   right: -24px;
-    //   border: 1px solid $color-secondary;
-    //   transform: rotate(45deg);
-    //   transition: all 0.5s ease;
-    // }
   }
-//   &:hover {
-//     .article-card-thumb-border::after {
-//       top: -40px;
-//       right: -40px;
-//       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-//     }
-//   }
+}
+
+.article-content {
+  max-width: 1080px;
+  margin: 60px auto 0;
+  p,
+  div,
+  li {
+    margin: 20px 0;
+    font-size: 18px;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 24px 0;
+    font-weight: 700;
+  }
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  h3 {
+    font-size: 1.75rem
+  }
+  h4 {
+    font-size: 1.5rem
+  }
+  h5 {
+    font-size: 1.25rem;
+  }
+  h6 {
+    font-size: 1rem;
+  }
+
+  .text-center img {
+    margin: 0 auto;
+    border-radius: 8px;
+    margin-top: 32px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .article-content {
+    margin-top: 40px;
+    p,
+    div,
+    li {
+      margin: 16px 0;
+      font-size: 16px;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 20px 0 0;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    h3 {
+      font-size: 1.25rem
+    }
+    h4 {
+      font-size: 1.125rem
+    }
+    h5 {
+      font-size: 1rem;
+    }
+    h6 {
+      font-size: 1rem;
+    }
+
+    .text-center img {
+      margin-top: 24px;
+    }
+  }
 }

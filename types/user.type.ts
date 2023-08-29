@@ -5,8 +5,8 @@ export interface User {
   phone_number: string | null
   role: string
   status: string
-  first_name: string | null
-  last_name: string | null
+  first_name: string
+  last_name: string
   avatar: string | null
   created_at: string
   updated_at: string

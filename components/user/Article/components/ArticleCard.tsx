@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
+import Link from 'next-intl/link'
 import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Post } from '@/types/post.type'
@@ -160,7 +160,7 @@ const ArticleCard = ({ article }: Props) => {
 
   return (
     <motion.article className='article-card' whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-      <Link href={`/articles/${article.slug}`}>
+      <Link href={`/article/${article.slug}`}>
         <div className='group flex w-full flex-wrap gap-8 py-3 md:max-w-[900px] md:gap-10'>
           <div className='w-full md:max-w-[420px]'>
             <div className='relative w-full pt-[56.25%] md:w-[420px]'>

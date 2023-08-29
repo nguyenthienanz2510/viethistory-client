@@ -5,7 +5,7 @@ import { IconDefinition, faAngleDown, faAngleUp } from '@fortawesome/free-solid-
 import { faCircle } from '@fortawesome/free-regular-svg-icons'
 import React, { useState } from 'react'
 import classNames from 'classnames'
-import Link from 'next/link'
+import Link from 'next-intl/link'
 import { useParams, usePathname, useRouter } from 'next/navigation'
 
 type NavItemProps = {
