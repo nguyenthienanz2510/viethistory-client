@@ -38,6 +38,34 @@
   }
 }
 
+.category-card {
+  color: $color-white;
+  a {
+    position: relative;
+    overflow: hidden;
+    &:hover {
+      color: $color-white;
+    }
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      width: 24px;
+      height: 24px;
+      transform: rotate(45deg);
+      background: $color-bg-default;
+      transition: all 0.3s ease;
+    }
+    &:hover::after {
+      top: -28x;
+      right: -28px;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
 .article-content {
   max-width: 1080px;
   margin: 60px auto 0;

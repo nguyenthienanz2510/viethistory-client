@@ -1,5 +1,5 @@
 import { LatestArticle } from '@/components/user/Article'
-import { Post } from '@/types/post.type'
+import { siteConfig } from '@/constants'
 import React from 'react'
 
 type Props = {
@@ -8,9 +8,11 @@ type Props = {
   }
 }
 
+export const revalidate = 60
+
 async function getData() {
   try {
-    const res = await fetch('https://viethistory-api.cyclic.app/posts')
+    const res = await fetch(`${siteConfig.API_URL}/posts`)
 
     if (!res.ok) {
       throw new Error('Failed to fetch data')

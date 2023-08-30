@@ -1,5 +1,8 @@
+import { globalString, siteConfig } from '@/constants'
 import { Post } from '@/types/post.type'
 import { convertDateTimeIsoStringToCustomFormat } from '@/utils/utils'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Image from 'next/image'
 import React from 'react'
 
@@ -14,7 +17,7 @@ export const revalidate = 60
 
 async function getData(slug?: string) {
   try {
-    const res = await fetch(`https://viethistory-api.cyclic.app/posts?slug=${slug}`)
+    const res = await fetch(`${siteConfig.API_URL}/posts?slug=${slug}`)
 
     if (!res.ok) {
       throw new Error('Failed to fetch data')
@@ -28,7 +31,7 @@ async function getData(slug?: string) {
 }
 
 export async function generateStaticParams() {
-  const res = await fetch('https://viethistory-api.cyclic.app/posts')
+  const res = await fetch(`${siteConfig.API_URL}/posts`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -45,32 +48,34 @@ export async function generateStaticParams() {
   }))
 }
 
-// export async function generateMetadata({ params: { slug } }: Props) {
+export async function generateMetadata({ params: { slug, locale } }: Props) {
+  const data = await getData(slug)
+  let articleDetail: Post = data.data.post
 
-//   const post: Post = await client.fetch(query, { slug })
+  if (locale !== 'en') {
+    articleDetail = articleDetail.translations.vi
+  }
 
-//   if (post == null) {
-//     return null
-//   }
+  if (articleDetail == null) {
+    return null
+  }
 
-//   return {
-//     openGraph: {
-//       images: urlFor(post.mainImage).url()
-//     },
-//     title: `${post.title} | Nguyen Thien An's Daily Blog`,
-//     description: post.description,
-//     keywords: [`${post.title}`, `Nguyen Thien An's Daily Blog`, `Nguyen Thien An`, `An's Blog`, `An's Daily Blog`],
-//     creator: post.author.name
-//   }
-// }
+  return {
+    openGraph: {
+      images: articleDetail.thumb.url
+    },
+    title: `${articleDetail.title} | ${globalString.SITE_NAME}`,
+    description: articleDetail.description,
+    creator: articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name
+  }
+}
 
 export default async function ArticleDetail({ params: { slug, locale } }: Props) {
   const data = await getData(slug)
   let articleDetail: Post = data.data.post
-  console.log(data)
+
   if (locale !== 'en') {
     articleDetail = articleDetail.translations.vi
-    console.log(articleDetail.translations)
   }
 
   return (
@@ -98,14 +103,20 @@ export default async function ArticleDetail({ params: { slug, locale } }: Props)
                   </p>
                 </div>
                 <div className='flex flex-shrink-0 items-start gap-2 pt-2'>
-                  <Image
-                    className='rounded-full object-cover object-center'
-                    alt={articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name}
-                    title={articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name}
-                    src={articleDetail.user_created.avatar || ''}
-                    width={40}
-                    height={40}
-                  />
+                  {articleDetail.user_created.avatar ? (
+                    <Image
+                      className='rounded-full object-cover object-center'
+                      alt={articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name}
+                      title={articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name}
+                      src={articleDetail.user_created.avatar}
+                      width={40}
+                      height={40}
+                    />
+                  ) : (
+                    <div className='flex h-10 w-10 items-center justify-center rounded-full border'>
+                      <FontAwesomeIcon icon={faUser} size='xl' />
+                    </div>
+                  )}
                   <p className='text-18 font-bold leading-[40px]'>
                     {articleDetail.user_created.first_name + ' ' + articleDetail.user_created.last_name}
                   </p>

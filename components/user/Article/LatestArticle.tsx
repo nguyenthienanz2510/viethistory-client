@@ -10,7 +10,7 @@ type Props = {
 const LatestArticle = ({ latestArticle, locale }: Props) => {
   return (
     <section className='py-12 md:py-16'>
-      <div className='container space-y-10 md:space-y-20'>
+      <div className='space-y-10 md:space-y-20'>
         {latestArticle.map((article: Post) => {
           if (locale !== 'en') {
             article = article.translations.vi
